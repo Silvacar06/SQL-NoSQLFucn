@@ -29,12 +29,12 @@ class SQLServerConnect:
     password = ""
     conexion = ""
     cursor = ""
-    
+    isError = False
     def __init__(self,route = ""):
         
-        if route == "":
+        if route == "" :
             self.servername = "localhost"
-            self.database = "TestDB"
+            self.database = "master"
             self.username = "PythonDev"
             self.password = "PythonDev.2020*"
             pass
@@ -43,9 +43,23 @@ class SQLServerConnect:
             pass
         
         try:
+
             self.conexion = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+self.servername+';DATABASE='+self.database+';UID='+self.username+';PWD='+ self.password)
+
         except:
+            
             print(f'The next error has ocurred: {self.conexion}')
+            self.isError = True
+
+        finally:
+            
+            if self.isError :
+                print("Migrar mensajes de error en un futuro!!!")
+                pass
+            else:
+                print(f'Conexión con {self.servername} iniciada exitosamente!')
+                pass
+
         super().__init__()
 
     def __ReadJSONConfig(self, route):
