@@ -47,24 +47,36 @@ class SQLServerConnect:
             self.conexion = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+self.servername+';DATABASE='+self.database+';UID='+self.username+';PWD='+ self.password)
 
         except:
-            
+            print("......................................")
+            print("")            
             print(f'The next error has ocurred: {self.conexion}')
             self.isError = True
+            print("")
+            print("......................................")
 
         finally:
             
             if self.isError :
+                print("......................................")
+                print("")
                 print("Migrar mensajes de error en un futuro!!!")
+                print("")
+                print("......................................")  
                 pass
             else:
+                print("......................................")
+                print("")
                 self.cursor = self.conexion.cursor()
                 print(f'Conexión con {self.servername} iniciada exitosamente!')
+                print("")
+                print("......................................")  
                 pass
 
         super().__init__()
 
     def __ReadJSONConfig(self, route):
-        
+        print("......................................")
+        print("")
         print(f'File detected!!!!   Try to open file: {route}')
         
         with open(route) as json_file:
@@ -73,15 +85,21 @@ class SQLServerConnect:
             self.database = data["database"]
             self.username = data["username"]
             self.password = data["password"]
+        print("")
+        print("......................................")
         return
 
-    def simplequery(self, fields = "*", table = "", condition = "1", print = False):
-        instruct = """
-            select
-            {fields}
-            from {table}
-            where {condition}
-        """
+    def simplequery(self, fields = "*", table = "TestTable", condition = ""):
+        instruct = ""
+        instruct = instruct + "SELECT "
+        instruct = instruct + fields + " "
+        instruct = instruct + "FROM "
+        instruct = instruct + table
+        print('')
         print(instruct)
-        # self.cursor.execute()
+        print('')
+        self.cursor.execute(instruct)
+        # print('')
+        # print(response)
+        # print('')
         return

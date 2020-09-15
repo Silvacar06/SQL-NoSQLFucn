@@ -1,6 +1,6 @@
 {
     "servername":"localhost",
-    "database":"master",
+    "database":"TestDB",
     "username":"PythonDev",
     "password":"PythonDev.2020*"
 }
