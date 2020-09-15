@@ -15,7 +15,6 @@
 
     In other case the connection start with localhost and generic python user.
     You may create the user in SQL server, in Security -> Logins
-
 '''
 
 import pyodbc
@@ -30,6 +29,7 @@ class SQLServerConnect:
     conexion = ""
     cursor = ""
     isError = False
+
     def __init__(self,route = ""):
         
         if route == "" :
@@ -57,13 +57,14 @@ class SQLServerConnect:
                 print("Migrar mensajes de error en un futuro!!!")
                 pass
             else:
+                self.cursor = self.conexion.cursor()
                 print(f'Conexión con {self.servername} iniciada exitosamente!')
                 pass
 
         super().__init__()
 
     def __ReadJSONConfig(self, route):
-
+        
         print(f'File detected!!!!   Try to open file: {route}')
         
         with open(route) as json_file:
@@ -72,3 +73,15 @@ class SQLServerConnect:
             self.database = data["database"]
             self.username = data["username"]
             self.password = data["password"]
+        return
+
+    def simplequery(self, fields = "*", table = "", condition = "1", print = False):
+        instruct = """
+            select
+            {fields}
+            from {table}
+            where {condition}
+        """
+        print(instruct)
+        # self.cursor.execute()
+        return
