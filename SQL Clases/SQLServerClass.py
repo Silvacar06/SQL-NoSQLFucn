@@ -22,30 +22,20 @@ import json
 
 class SQLServerConnect:
     
-    servername = ""
-    database = ""
-    username = ""
-    password = ""
-    conexion = ""
-    cursor = ""
-    isError = False
-
     def __init__(self,route = ""):
         
         if route == "" :
             self.servername = "localhost"
             self.database = "master"
-            self.username = "PythonDev"
+            self.username = "pythonDevelop"
             self.password = "PythonDev.2020*"
             pass
         else:
             self.__ReadJSONConfig(route)
             pass
-        
+        self.isError = False
         try:
-
             self.conexion = pyodbc.connect('DRIVER={ODBC Driver 17 for SQL Server};SERVER='+self.servername+';DATABASE='+self.database+';UID='+self.username+';PWD='+ self.password)
-
         except:
             print("......................................")
             print("")            
@@ -53,9 +43,7 @@ class SQLServerConnect:
             self.isError = True
             print("")
             print("......................................")
-
-        finally:
-            
+        finally:     
             if self.isError :
                 print("......................................")
                 print("")
@@ -73,6 +61,7 @@ class SQLServerConnect:
                 pass
 
         super().__init__()
+        
 
     def __ReadJSONConfig(self, route):
         print("......................................")

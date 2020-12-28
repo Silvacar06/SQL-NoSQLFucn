@@ -1,6 +1,8 @@
 {
-    "servername":"localhost",
-    "database":"TestDB",
-    "username":"PythonDev",
-    "password":"PythonDev.2020*"
+    "local_test":{
+        "servername":"localhost",
+        "database":"TestDB",
+        "username":"pythonDevelop",
+        "password":"PythonDev.2020*"
+    }
 }
